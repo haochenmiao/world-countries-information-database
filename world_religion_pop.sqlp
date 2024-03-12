@@ -1,0 +1,11 @@
+USE geo;
+
+SELECT y.name as country, 
+       y.population as population, 
+       (CASE WHEN y.religions is missing THEN 0
+             WHEN is_array(y.religions) THEN array_length(y.religions)
+             ELSE 1 END) as num_religions
+FROM world x, x.mondial.country y
+ORDER BY y.name;
+
+-- Duration of all jobs: 0.228 sec

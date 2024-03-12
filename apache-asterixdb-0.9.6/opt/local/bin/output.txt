@@ -1,0 +1,18 @@
+{
+	"requestID": "b0cf88c7-b06c-4169-b215-35f6fe8f72e9",
+	"signature": {
+		"*": "*"
+	},
+	"errors": [{ 
+		"code": 1,		"msg": "ASX0040: No statement provided"	} 
+	],
+	"status": "fatal",
+	"metrics": {
+		"elapsedTime": "71.717875ms",
+		"executionTime": "0ns",
+		"resultCount": 0,
+		"resultSize": 0,
+		"processedObjects": 0,
+		"errorCount": 1
+	}
+}

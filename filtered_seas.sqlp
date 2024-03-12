@@ -1,0 +1,25 @@
+USE geo;
+
+SELECT 
+    c.`-car_code` AS country_code,
+    c.name AS country_name,
+    (SELECT VALUE {'sea': s.name} 
+     FROM geo.world w2, w2.mondial.sea s
+     WHERE c.`-car_code` IN split(s.`-country`, ' ')
+     GROUP BY s.name) AS seas,
+    ARRAY_LENGTH(
+        (SELECT VALUE s.name 
+         FROM geo.world w2, w2.mondial.sea s
+         WHERE c.`-car_code` IN split(s.`-country`, ' ')
+         GROUP BY s.name)
+      ) AS number_of_seas
+FROM geo.world w, w.mondial.country c
+WHERE ARRAY_LENGTH(
+        (SELECT VALUE s.name 
+         FROM geo.world w2, w2.mondial.sea s
+         WHERE c.`-car_code` IN split(s.`-country`, ' ')
+         GROUP BY s.name)
+      ) >= 2
+ORDER BY number_of_seas DESC;
+
+-- Duration of all jobs: 0.785 sec
